@@ -36,15 +36,24 @@ pipeline {
             steps {
                 sshagent (credentials: ['ec2-ssh-key-id']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no ec2-user@13.49.57.179 '
-                        docker pull anoushkaanand28/ci-cd-demo:latest &&
-                        docker stop demo || true &&
-                        docker rm demo || true &&
+                        ssh -o StrictHostKeyChecking=no ec2-user@13.49.57.179 << EOF
+                        docker pull anoushkaanand28/ci-cd-demo:latest
+                        docker stop demo || true
+                        docker rm demo || true
                         docker run -d --name demo -p 5000:5000 anoushkaanand28/ci-cd-demo:latest
-                        '
+                        EOF
                     '''
                 }
             }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Build and deployment successful!'
+        }
+        failure {
+            echo '❌ Build or deployment failed. Check the logs.'
         }
     }
 }
