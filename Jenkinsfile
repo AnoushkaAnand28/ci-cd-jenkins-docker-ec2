@@ -35,7 +35,7 @@ pipeline {
         stage('Deploy to EC2') {
             steps {
                 sshagent (credentials: ['ec2-ssh-key-id']) {
-                    sh '''
+                    bat '''
                         ssh -o StrictHostKeyChecking=no amazonlinux@13.49.57.179 '
                         docker pull anoushkaanand28/ci-cd-demo:latest &&
                         docker stop demo || true &&
