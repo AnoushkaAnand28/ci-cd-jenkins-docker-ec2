@@ -37,6 +37,7 @@ pipeline {
                 sshagent (credentials: ['ec2-ssh-key-id']) {
                     sh '''
                         ssh -o StrictHostKeyChecking=no ec2-user@13.49.57.179 << EOF
+                        set -e
                         docker pull anoushkaanand28/ci-cd-demo:latest
                         docker stop demo || true
                         docker rm demo || true
