@@ -25,7 +25,7 @@ pipeline {
         stage('Push to DockerHub') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-cred-id') {
+                    docker.withRegistry('https://index.docker.io/v1/', 'anoushkaanand28') {
                         docker.image("${DOCKER_IMAGE}:latest").push()
                     }
                 }
@@ -35,7 +35,7 @@ pipeline {
         stage('Deploy to EC2') {
             steps {
                 sshagent (credentials: ['ec2-ssh-key-id']) {
-                    bat '''
+                    sh '''
                         ssh -o StrictHostKeyChecking=no amazonlinux@13.49.57.179 '
                         docker pull anoushkaanand28/ci-cd-demo:latest &&
                         docker stop demo || true &&
