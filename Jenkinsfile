@@ -36,11 +36,11 @@ pipeline {
             steps {
                 sshagent (credentials: ['ec2-ssh-key-id']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no ec2-user@EC2_PUBLIC_IP '
+                        ssh -o StrictHostKeyChecking=no amazonlinux@13.49.57.179 '
                         docker pull anoushkaanand28/ci-cd-demo:latest &&
                         docker stop demo || true &&
                         docker rm demo || true &&
-                        docker run -d --name demo -p 80:3000 anoushkaanand28/ci-cd-demo:latest
+                        docker run -d --name demo -p 5000:5000 anoushkaanand28/ci-cd-demo:latest
                         '
                     '''
                 }
