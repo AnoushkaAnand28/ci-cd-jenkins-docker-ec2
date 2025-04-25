@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('anoushkaanand28')
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-cred-id')
         DOCKER_IMAGE = 'anoushkaanand28/ci-cd-demo'
         SSH_KEY = credentials('ec2-ssh-key-id')
     }
@@ -25,7 +25,7 @@ pipeline {
         stage('Push to DockerHub') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'anoushkaanand28') {
+                    docker.withRegistry('https://index.docker.io/v1/','dockerhub-cred-id') {
                         docker.image("${DOCKER_IMAGE}:latest").push()
                     }
                 }
