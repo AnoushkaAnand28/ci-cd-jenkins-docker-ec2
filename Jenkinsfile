@@ -25,7 +25,7 @@ pipeline {
         stage('Push to DockerHub') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/','dockerhub-cred-id') {
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-cred-id') {
                         docker.image("${DOCKER_IMAGE}:latest").push()
                     }
                 }
@@ -36,7 +36,11 @@ pipeline {
             steps {
                 sshagent (credentials: ['ec2-ssh-key-id']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no ec2-user@13.49.57.179 << EOF
+                        # Automatically add the EC2 host's SSH key to known_hosts
+                        ssh-keyscan -H 13.49.57.179 >> ~/.ssh/known_hosts
+
+                        # Proceed with the deployment
+                        ssh ec2-user@13.49.57.179 << EOF
                         set -e
                         docker pull anoushkaanand28/ci-cd-demo:latest
                         docker stop demo || true
