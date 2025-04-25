@@ -17,7 +17,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("${DOCKER_IMAGE}:latest")
+                    docker.build("${DOCKER_IMAGE}: ")
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-cred-id') {
-                        docker.image("${DOCKER_IMAGE}:latest").push()
+                        docker.image("${DOCKER_IMAGE}: ").push()
                     }
                 }
             }
@@ -42,10 +42,10 @@ pipeline {
                         # Proceed with the deployment
                         ssh ec2-user@13.49.57.179 << EOF
                         set -e
-                        docker pull anoushkaanand28/ci-cd-demo:latest
+                        docker pull anoushkaanand28/ci-cd-demo: 
                         docker stop demo || true
                         docker rm demo || true
-                        docker run -d --name demo -p 5000:3000 anoushkaanand28/ci-cd-demo:latest
+                        docker run -d --name demo -p 5000:3000 anoushkaanand28/ci-cd-demo: 
                         EOF
                     '''
                 }
