@@ -41,7 +41,7 @@ pipeline {
                         docker pull anoushkaanand28/ci-cd-demo:latest
                         docker stop demo || true
                         docker rm demo || true
-                        docker run -d --name demo -p 5000:5000 anoushkaanand28/ci-cd-demo:latest
+                        docker run -d --name demo -p 5000:3000 anoushkaanand28/ci-cd-demo:latest
                         EOF
                     '''
                 }
