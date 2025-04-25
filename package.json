@@ -8,8 +8,16 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "- Jenkins\r - GitHub\r - Docker & DockerHub\r - AWS EC2\r - Shell Scripting",
   "dependencies": {
     "express": "^5.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnoushkaAnand28/ci-cd-jenkins-docker-ec2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AnoushkaAnand28/ci-cd-jenkins-docker-ec2/issues"
+  },
+  "homepage": "https://github.com/AnoushkaAnand28/ci-cd-jenkins-docker-ec2#readme"
 }
