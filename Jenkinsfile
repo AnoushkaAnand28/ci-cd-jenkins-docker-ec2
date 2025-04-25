@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/AnoushkaAnand28/ci-cd-jenkins-docker-ec2.git'
+                git branch: 'main', url: 'https://github.com/AnoushkaAnand28/ci-cd-jenkins-docker-ec2.git'
             }
         }
 
